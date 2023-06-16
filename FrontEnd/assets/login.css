@@ -47,7 +47,7 @@ table {
 }
 /** end reset css**/
 body {
-	background: #FFFEF8;
+    background: #FFFEF8;
 	max-width: 1140px;
 	margin:auto;
 	font-family: 'Work Sans';
@@ -73,7 +73,7 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-	text-transform: uppercase;
+    text-transform: uppercase;
 }
 h2 {
 	font-family: 'Syne';
@@ -97,94 +97,40 @@ nav a {
 nav a:hover {
 	color: #B1663C;
 }
-#introduction {
-	display: flex;
+#login {
 	align-items: center;
-}
-#introduction figure {
-	flex: 1;
-}
-#introduction img {
-	display: block;
-	margin: auto;
-	width: 80%;
-}
-#introduction article {
-	flex: 1;
-}
-#introduction h2 {
-	margin-bottom: 1em;
-}
-
-#introduction p {
-	margin-bottom: 0.5em;
-}
-#portfolio h2 {
-	text-align: center;
-	margin-bottom: 1em;
-}
-.gallery {
-	width: 100%;
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-column-gap: 20px;
-	grid-row-gap: 20px;
-}
-.gallery img {
-	width: 100%;
-}
-/* Filtres */
-.filters {
-	align-items: center;
-	display: flex;
-	gap: 15px;
-	justify-content: center;
-	margin-bottom: 60px;
-	margin-top: 40px;
-}
-.filtersNone {
-	border: 1px solid #1D6154;
-	border-radius: 60px;
-	color: #1D6154;
-	cursor: pointer;
-	font-family: 'Syne', sans-serif;
-	padding: 10px 25px 10px 25px;
-}
-.filterActive {
-	color: white;
-	background-color: #1D6154;
-}
-#contact {
-	width: 50%;
-	margin: auto;
-}
-#contact > * {
-	text-align: center;
-}
-#contact h2{
-	margin-bottom: 20px;
-}
-#contact form {
-	text-align: left;
-	margin-top:30px;
 	display: flex;
 	flex-direction: column;
+	height: 530px;
 }
-#contact input {
+.login__title {margin: 60px;}
+#login__form {
+	display:flex;
+	flex-direction: column;
+}
+#login label {
+	margin: 2em 0 1em 0;
+}
+#login input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	width: 379px;
 }
-#contact label {
-	margin: 2em 0 1em 0;
+#connection {
+	max-width: 179px;
 }
-#contact textarea {
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+#login a {
+	color: black;
+	margin-bottom: 30px;
+}
+#error {
+	color: red;
+	margin-top: 15px;
 }
 input[type="submit"]{
-	cursor: pointer;
+    cursor: pointer;
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -194,8 +140,10 @@ input[type="submit"]{
 	text-align: center;
 	border-radius: 60px ;
 }
-footer nav ul {
-	display: flex;
-	justify-content: flex-end;
-	margin: 2em
+#footer__login {
+    display: flex;
+    justify-content: flex-end;
+	position: absolute;
+	bottom: 20px;
+	right: 380px;
 }
