@@ -44,7 +44,10 @@ formulaire.addEventListener("submit", async (event) => {
         } else {
             // Sinon message d'erreur 
             messageError.textContent = "Erreur dans l’identifiant ou le mot de passe";
-            alert("Echec de l'authentification");
+            // Le message d'erreur s'efface au bout de 5s
+            setTimeout(() => {
+                messageError.style.display = 'none';
+            }, 5000);
         }   
 
     } catch (error) {
