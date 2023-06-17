@@ -48,18 +48,17 @@ table {
 /** end reset css**/
 body {
 	background: #FFFEF8;
-	max-width: 1140px;
-	margin:auto;
+	width: 100%;
 	font-family: 'Work Sans';
 	font-size: 14px;
 }
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0;
+	margin: 50px 200px;
 }
 section {
-	margin: 50px 0;
+	margin: 50px 200px;
 }
 h1 {
 	display: flex;
@@ -155,7 +154,7 @@ nav a:hover {
 	background-color: #1D6154;
 }
 #contact {
-	width: 50%;
+	width: 30%;
 	margin: auto;
 }
 #contact > * {
@@ -197,5 +196,48 @@ input[type="submit"]{
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	margin: 20px 200px;
+}
+
+/* Mode Edition */
+#navEdition {
+	align-items: center;
+	background: black;
+	display: flex;
+	gap: 21px;
+	height: 59px;
+	justify-content: center;
+}
+.modEdition {
+	color: white;
+}
+.modPublish {
+	background: white;
+	border-radius: 60px;
+ 	color: black;
+	cursor: pointer;
+	padding: 11px 23px;
+}
+.buttonModify {
+	cursor: pointer;
+	margin-left: 57px;
+	margin-top: 15px;
+}
+.buttonModifyOne {
+	color: black;
+	cursor: pointer;
+	padding-left: 31px;
+}
+h2 > span {
+	font-family: 'Work Sans';
+	font-size: 14px;
+	font-weight: 400 !important;
+}
+.buttonModifyTwo {
+	cursor: pointer;
+	margin-top: -30px;
+	padding-bottom: 20px;
+}
+.isLoggedIn {
+	display: none !important;
 }
