@@ -6,4 +6,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
 async function initWorks() {
     getWorks();
     await getCategories();
+
+    await checkUserConnected();
 }
