@@ -15,6 +15,19 @@
 		<p class="modEdition"><i class="fa-regular fa-pen-to-square"></i> Mode édition</p>
 		<p class="modPublish">Publier les changements</p>
 	</div>
+	<div class="modal__container-one">
+		<div class="overlay modal__trigger"></div>
+		<div class="modal__one">
+			<span class="close__modal modal__trigger"><i class="fa-solid fa-xmark"></i></span>
+			<h2 class="modal__one-title">Galerie photo</h2>
+			<div class="modal__one-gallery">
+				<!-- Ajout dynamique de la gallerie -->
+			</div>
+			<div class="modal__one-dividerbar"></div>
+			<button class="modal__one-addbutton">Ajouter une photo</button>
+			<p class="modal__one-deletegallery">Supprimer la galerie</p>
+		</div>
+	</div>
 	<header>
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 		<nav>
@@ -43,7 +56,7 @@
 		<section id="portfolio">
 			<div class="portfolio__title">
 				<h2>Mes Projets</h2>
-				<span class="buttonModifyOne"><i class="fa-regular fa-pen-to-square"></i> Mode édition</span>
+				<span class="buttonModifyOne modal__trigger"><i class="fa-regular fa-pen-to-square"></i> Mode édition</span>
 			</div>
 			<div class="filters">
 				<!-- Gestion dynamique de récupération des catégories et du filtrage des travaux -->
