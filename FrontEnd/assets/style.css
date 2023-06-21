@@ -250,7 +250,7 @@ footer nav ul {
 	width: 100vw;
 	height: 100vh;
 }
-.modal__container-one.active {
+.modal__container.active {
 	display: block;
 }
 .overlay {
