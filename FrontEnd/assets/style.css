@@ -207,7 +207,7 @@ footer nav ul {
 #navEdition {
 	align-items: center;
 	background: black;
-	display: flex;
+	display: none;
 	gap: 21px;
 	height: 59px;
 	justify-content: center;

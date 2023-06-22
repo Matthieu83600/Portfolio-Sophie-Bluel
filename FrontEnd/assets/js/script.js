@@ -4,8 +4,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
   });
 // Fonction qui récupère les appels à l'API type "GET" et les initialise
 async function initWorks() {
-    checkUserConnected();
-
     getWorks();
     await getCategories();
+
+    checkUserConnected();
 }
