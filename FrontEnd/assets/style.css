@@ -324,10 +324,9 @@ footer nav ul {
 	flex-direction: column;
 	gap: 7px;
 	margin-bottom: 30px;
-	margin-left: 105px;
 	margin-top: 36px;
 	max-width: 420px;
-	width: 95%;
+	width: 100%;
 }
 .modal__two-icon {
 	color: #B9C5CC;
@@ -346,6 +345,7 @@ footer nav ul {
 	font-size: 14px;
 	line-height: 16px;
 	padding: 10px 33px;
+	text-align: center;
 }
 .modal__two-desc {
 	color: #444444;
