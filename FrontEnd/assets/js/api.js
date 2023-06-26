@@ -27,30 +27,8 @@
                 card.appendChild(titleCard);
                 // On relie la card à la balise div qui contient la galerie
                 gallery.appendChild(card);
-
-            // Récupération des travaux pour la modale
-                // Sélection de la div qui va contenir les données récupérées via l'API
-                const galleryModal = document.querySelector(".modal__one-gallery");
-                galleryModal.innerHTML = "";
-                // Création des travaux via les données récupérées
-                dataWorks.forEach((workModal) => {
-                    // Création des éléments nécessaires
-                    const cardModal = document.createElement("figure");
-                    const imgCardModal = document.createElement("img");
-                    const titleCardModal = document.createElement("figcaption");
-                    // On récupère les données importantes pour afficher les travaux
-                    imgCardModal.src = workModal.imageUrl;
-                    imgCardModal.alt = workModal.title;
-                    imgCardModal.setAttribute('category', workModal.categoryId);
-                    titleCardModal.innerText = "éditer";
-                    // On relie les éléments img et title à leur parent card
-                    cardModal.appendChild(imgCardModal);
-                    cardModal.appendChild(titleCardModal);
-                    // On relie la card à la balise div qui contient la galerie
-                    galleryModal.appendChild(cardModal);
-                });
             });
-        });    
+        });   
     };
 
     // Récupération des catégories 
@@ -113,4 +91,38 @@
                 });
             });  
         });
+    };
+
+    // Récupération des travaux pour la modale 
+    async function getWorksModal() {
+        // Récupération des travaux pour la modale
+        await fetch("http://localhost:5678/api/works")
+        .then(response => response.json())
+        .then(dataWorksModal => {
+                // Sélection de la div qui va contenir les données récupérées via l'API
+                const galleryModal = document.querySelector(".modal__one-gallery"); 
+
+                // Création des travaux via les données récupérées
+                dataWorksModal.forEach((workModal) => {
+                    // Création des éléments nécessaires
+                    const cardModal = document.createElement("figure");
+                    const imgCardModal = document.createElement("img");
+                    const titleCardModal = document.createElement("figcaption");
+                    // On récupère les données importantes pour afficher les travaux
+                    imgCardModal.src = workModal.imageUrl;
+                    imgCardModal.alt = workModal.title;
+                    imgCardModal.setAttribute('category', workModal.categoryId);
+                    titleCardModal.innerText = "éditer";
+                    // Ajout de l'icône de suppression d'un projet
+                    const deleteButton = document.createElement('button');
+                    deleteButton.classList.add('deleteButton');
+                    deleteButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+                    // On relie les éléments img et title à leur parent card
+                    cardModal.appendChild(imgCardModal);
+                    cardModal.appendChild(titleCardModal);
+                    cardModal.appendChild(deleteButton);
+                    // On relie la card à la balise div qui contient la galerie
+                    galleryModal.appendChild(cardModal);
+                });
+        });        
     };

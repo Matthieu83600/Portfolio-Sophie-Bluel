@@ -242,7 +242,7 @@ footer nav ul {
 	padding-bottom: 20px;
 }
 
-/* First Modal */
+/* Modal */
 .modal__container {
 	display: none;
 	position: fixed;
@@ -259,14 +259,16 @@ footer nav ul {
 	height: 100%;
 	background: rgba(0, 0, 0, 0.30);
 }
+
+/* First Modal */
 .modal__one {
 	background: white;
 	border-radius: 10px;
 	display: flex;
 	flex-direction: column;
-	max-height: 731px; 
+	height: auto;
 	max-width: 630px;
-	width: 95%;
+	width: 100%;
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -278,18 +280,36 @@ footer nav ul {
 	gap: 10px;
 	margin-left: 105px;
 	margin-right: 95px;
-	margin-top: 40px;
+	margin-top: 35px;
 }
 .modal__one-gallery img {
 	max-height: 102.57px;
 	max-width: 76.86px;
+}
+.movePhoto {
+	background: black;
+	color: white;
+	padding: 3px;
+	position: absolute;
+	top: 125px;
+	left: 137px;
+}
+.deleteButton {
+	background: black;
+	border: none;
+	color: white;
+	cursor: pointer;
+	padding: 2.5px 3px;
+	position: relative;
+	top: -115px;
+	left: 56px;
 }
 .modal__one-dividerbar {
 	border: 1px solid #B3B3B3;
 	max-width: 420px;
 	margin-bottom: 38px;
 	margin-left: 105px;
-	margin-top: 45px;
+	margin-top: 10px;
 }
 .modal__one-addbutton {
 	background: #1D6154;
@@ -298,7 +318,7 @@ footer nav ul {
 	color: white;
 	cursor: pointer;
 	height: 36px;
-	margin-bottom: 32px;
+	margin-bottom: 25px;
 	margin-left: 195px;
 	width: 237px;
 	font-family: 'Syne';
@@ -315,14 +335,16 @@ footer nav ul {
 	font-weight: 400;
 	font-size: 14px;
 }
+
+/* Second Modal */
 .modal__two {
 	background: white;
 	border-radius: 10px;
 	display: flex;
 	flex-direction: column;
-	max-height: 731px; 
+	height: auto; 
 	max-width: 630px;
-	width: 95%;
+	width: 100%;
 	position: absolute;
 	top: 55%;
 	left: 50%;
@@ -391,7 +413,7 @@ footer nav ul {
 .modal__two-dividerbar {
 	border: 1px solid #B3B3B3;
 	max-width: 420px;
-	margin-top: 45px;
+	margin-top: 35px;
 }
 .modal__two-form input[type="submit"]{
 	cursor: pointer;
@@ -418,13 +440,15 @@ footer nav ul {
 }
 .return__modal-one {
 	cursor: pointer;
+	font-size: 20px;
 	position: absolute;
 	left: 36px;
-	top: 32px;
+	top: 25px;
 }
 .close__modal {
 	cursor: pointer;
+	font-size: 20px;
 	position: absolute;
 	right: 36px;
-	top: 32px;
+	top: 25px;
 }

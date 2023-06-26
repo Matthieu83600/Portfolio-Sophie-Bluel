@@ -39,3 +39,6 @@
         modalOne.style.display = "flex"; // Affiche modale "Galerie photo"
         modalTwo.style.display = "none"; // Masque modale "Ajout photo"
     };
+
+// Affichage des travaux dans la galerie photo de la modale
+getWorksModal();
