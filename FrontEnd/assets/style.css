@@ -272,6 +272,18 @@ footer nav ul {
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
+.modal__one-gallery {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-left: 105px;
+	margin-right: 95px;
+	margin-top: 40px;
+}
+.modal__one-gallery img {
+	max-height: 102.57px;
+	max-width: 76.86px;
+}
 .modal__one-dividerbar {
 	border: 1px solid #B3B3B3;
 	max-width: 420px;
