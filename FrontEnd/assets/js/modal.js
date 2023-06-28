@@ -112,3 +112,20 @@ async function deleteProject(e) {
             alert("Le projet n'a pas été supprimé");
         };
 };
+// Fonction d'envoi d'un nouveau projet 
+
+// Ajouter une photo
+
+// Ajout des catégories au formulaire d'ajout de projet 
+fetch("http://localhost:5678/api/categories")
+    .then(response => response.json())
+    .then(dataCategories => {
+        const select = document.getElementById("photoCategories");
+
+        dataCategories.forEach((category) => {
+            const option = document.createElement('option');
+            option.innerText = category.name;
+            option.id = category.id;
+            select.appendChild(option);
+        })
+    });
