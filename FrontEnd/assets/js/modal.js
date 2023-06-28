@@ -41,9 +41,9 @@
     };
 
 // Récupération des travaux pour la modale 
-async function getWorksModal() {
+function getWorksModal() {
     // Récupération des travaux pour la modale
-    await fetch("http://localhost:5678/api/works")
+    fetch("http://localhost:5678/api/works")
     .then(response => response.json())
     .then(dataWorksModal => {
             // Sélection de la div qui va contenir les données récupérées via l'API
@@ -63,40 +63,52 @@ async function getWorksModal() {
                 titleCardModal.innerText = "éditer";
                 // Ajout de l'icône de suppression d'un projet
                 const deleteButton = document.createElement('button');
+                deleteButton.type = "submit";
+                deleteButton.id= "delete"
                 deleteButton.classList.add('deleteButton');
                 deleteButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
-                // Evènement au clic pour supprimer un projet 
-                deleteButton.addEventListener("click", async (event) => {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    confirm("Voulez-vous supprimer le projet ?");
-                    const id = cardModal.id;
-                    /* Test de récupération de l'id du projet
-                       console.log(id);
-                    */
-                    const monToken = localStorage.getItem("token");
-                    let response = await fetch(`http://localhost:5678/api/works/${id}`, {
-                        method: 'DELETE',
-                        headers: {
-                            accept: '*/*',
-                            Authorization: `Bearer ${monToken}`,
-                        }
-                    });
-                    if (response.ok) {
-                        return false;
-                    } else {
-                        alert("Echec dans la suppression du projet");
-                    }
-                });
+                // Evènement au clic
+                deleteButton.addEventListener("click", deleteProject);
                 // On relie les éléments img et title à leur parent card
                 cardModal.appendChild(imgCardModal);
                 cardModal.appendChild(titleCardModal);
                 cardModal.appendChild(deleteButton);
                 // On relie la card à la balise div qui contient la galerie
                 galleryModal.appendChild(cardModal);
-                /* Test de récupération de l'id
-                   console.log(cardModal);
-                */
             });
     });        
+};
+
+// Fonction de suppression d'un projet 
+async function deleteProject(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const deleteButton = document.getElementById("#delete");
+    let cardModal = document.querySelector(".modal__one-gallery figure");
+        if (confirm("Voulez-vous supprimer le projet ?")) {
+            const id = cardModal.id;
+
+            /* Test de récupération de l'id du projet
+               console.log(id);
+            */
+            const monToken = localStorage.getItem("token");
+            try {
+                let response = await fetch(`http://localhost:5678/api/works/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    accept: '*/*',
+                    Authorization: `Bearer ${monToken}`,
+                }
+            });
+            if (response.ok) {
+                alert("Le projet a été supprimé correctement.");
+            } else {
+                alert("Echec dans la suppression du projet...");
+            }
+            } catch (error) {
+                console.log("Une erreur est survenue", error);
+            };
+        } else {
+            alert("Le projet n'a pas été supprimé");
+        };
 };

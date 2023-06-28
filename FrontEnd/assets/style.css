@@ -328,6 +328,7 @@ footer nav ul {
 }
 .modal__one-deletegallery {
 	color: red;
+	cursor: pointer;
 	margin-bottom: 48px;
 	text-align: center;
 	font-family: 'Syne';

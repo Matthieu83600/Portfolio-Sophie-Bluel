@@ -15,7 +15,7 @@
 		<p class="modEdition"><i class="fa-regular fa-pen-to-square"></i> Mode édition</p>
 		<p class="modPublish">Publier les changements</p>
 	</div>
-	<div class="modal__container">
+	<div id="modal" class="modal__container">
 		<div class="overlay modal__trigger"></div>
 		<div class="modal__one">
 			<span class="close__modal modal__trigger">
@@ -51,6 +51,7 @@
 				<span class="errorMessageTitle"></span>
 				<label for="photoCategories">Catégorie</label>
 				<select id="photoCategories"></select>
+				<span id="errorForm"></span>
 				<span class="modal__two-dividerbar"></span>
 				<input class="modal__two-validationbutton" type="submit" value="Valider">
 			</form>
