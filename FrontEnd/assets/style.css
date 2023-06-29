@@ -245,6 +245,7 @@ footer nav ul {
 /* Modal */
 .modal__container {
 	display: none;
+	overflow: auto;
 	position: fixed;
 	top: 0;
 	width: 100vw;
