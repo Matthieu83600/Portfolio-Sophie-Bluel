@@ -43,17 +43,21 @@
 					<span class="modal__two-icon">
 						<i class="fa-regular fa-image"></i>
 					</span>
-					<button id="addPhoto" class="modal__two-addphoto">+ Ajouter photo</button>
+					<label for="addPhoto" class="modal__two-textAddPhoto">+ Ajouter photo</label>
+					<input id="addPhoto" class="modal__two-addphoto" type="file" accept="image/jpg image/png"></input>
 					<span class="modal__two-desc">jpg, png : 4mo max</span>
+					<span class="errorImage"></span>
 				</span>
 				<label for="photoTitle">Titre</label>
 				<input id="photoTitle" type="text">
-				<span class="errorMessageTitle"></span>
+				<span class="errorTitle"></span>
 				<label for="photoCategories">Catégorie</label>
-				<select id="photoCategories"></select>
-				<span id="errorForm"></span>
+				<select id="photoCategories">
+					<option class="empty"></option>
+				</select>
+				<span id="errorCategory"></span>
 				<span class="modal__two-dividerbar"></span>
-				<input class="modal__two-validationbutton" type="submit" value="Valider">
+				<input id="validateProject" class="modal__two-validationbutton" type="submit" value="Valider">
 			</form>
 		</div>
 	</div>

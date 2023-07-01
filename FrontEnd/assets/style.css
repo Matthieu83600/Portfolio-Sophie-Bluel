@@ -348,7 +348,7 @@ footer nav ul {
 	max-width: 630px;
 	width: 100%;
 	position: absolute;
-	top: 55%;
+	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
@@ -359,10 +359,17 @@ footer nav ul {
 	display: flex;
 	flex-direction: column;
 	gap: 7px;
+	height: 184px;
 	margin-bottom: 30px;
 	margin-top: 36px;
 	max-width: 420px;
 	width: 100%;
+}
+.modal__two-imgcontainer img {
+	height: 26.7%;
+	width: 20%;
+	position: absolute;
+	top: 122px;
 }
 .modal__two-icon {
 	color: #B9C5CC;
@@ -370,17 +377,22 @@ footer nav ul {
 	margin-bottom: 21px;
 	margin-top: 28px;
 }
-.modal__two-addphoto {
-	cursor: pointer;
-	background: #CBD6DC;
-	border: none;
-	border-radius: 50px;
+.modal__two-form input[type="file"] {
+	display: none;
+}
+.modal__two-textAddPhoto {
 	color: #306685;
 	font-family: 'Work Sans';
 	font-weight: 500;
 	font-size: 14px;
 	line-height: 16px;
-	padding: 10px 33px;
+	cursor: pointer;
+	background: #CBD6DC;
+	border: none;
+	border-radius: 50px;
+	max-height: 36px;
+	max-width: 173px;
+	padding: 10px 23px;
 	text-align: center;
 }
 .modal__two-desc {
@@ -439,6 +451,9 @@ footer nav ul {
 	font-size: 26px;
 	margin-top: 60px;
 	text-align: center;
+}
+.errorImage, .errorTitle, .errorCategory {
+	color: red;
 }
 .return__modal-one {
 	cursor: pointer;

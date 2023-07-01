@@ -108,11 +108,34 @@ async function getWorksModal() {
             galleryModal.appendChild(iconMove);
         });
 });     
-}
-   
-// Fonction d'envoi d'un nouveau projet 
+};
 
-// Ajouter une photo
+// Formulaire d'envoi d'un nouveau projet
+    // Eléments requis pour valider l'ajout d'un projet
+    const inputImage = document.getElementById("addPhoto");
+    const titleProject = document.getElementById("photoTitle");
+    const categoryProject = document.getElementById("photoCategories");
+    const validateProject = document.getElementById("validateProject");
+
+    // Messages d'erreurs 
+    const errorImage = document.querySelector("errorImage");
+    const errorTitle = document.querySelector("errorTitle");
+    const errorCategory = document.querySelector("errorCategory");
+
+    // Prévisualisation d'une photo
+    function previewPicture() {
+        const sectionPrev = document.querySelector(".modal__two-imgcontainer");
+        inputImage.addEventListener("change", (e) => {
+            const textAddPhoto = document.querySelector(".modal__two-textAddPhoto");  
+            textAddPhoto.style.display = 'none';  
+            const prevImage = document.createElement("img");
+            let selectionFile = document.getElementById("addPhoto").files[0];
+            const urlObjet = URL.createObjectURL(selectionFile);
+            prevImage.src = urlObjet;
+            sectionPrev.appendChild(prevImage);
+        });
+    };
+    previewPicture();
 
 // Ajout des catégories au formulaire d'ajout de projet 
 fetch("http://localhost:5678/api/categories")
@@ -125,5 +148,5 @@ fetch("http://localhost:5678/api/categories")
             option.innerText = category.name;
             option.id = category.id;
             select.appendChild(option);
-        })
+        });
     });
