@@ -452,8 +452,9 @@ footer nav ul {
 	margin-top: 60px;
 	text-align: center;
 }
-.errorImage, .errorTitle, .errorCategory {
+#errorForm {
 	color: red;
+	text-align: center;
 }
 .return__modal-one {
 	cursor: pointer;

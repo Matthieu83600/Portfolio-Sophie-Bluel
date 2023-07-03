@@ -38,24 +38,22 @@
 				<i class="fa-solid fa-xmark"></i>
 			</span>
 			<h2 class="modal__title">Ajout photo</h2>
-			<form class="modal__two-form">
+			<form id="modal__two-form" class="modal__two-form">
 				<span class="modal__two-imgcontainer">
 					<span class="modal__two-icon">
 						<i class="fa-regular fa-image"></i>
 					</span>
-					<label for="addPhoto" class="modal__two-textAddPhoto">+ Ajouter photo</label>
-					<input id="addPhoto" class="modal__two-addphoto" type="file" accept="image/jpg image/png"></input>
+					<label for="addPhoto" class="modal__two-textAddPhoto" onchange="veriForm()">+ Ajouter photo</label>
+					<input id="addPhoto" class="modal__two-addphoto" type="file" accept="image/jpg image/png" onchange="verifForm()"></input>
 					<span class="modal__two-desc">jpg, png : 4mo max</span>
-					<span class="errorImage"></span>
 				</span>
 				<label for="photoTitle">Titre</label>
-				<input id="photoTitle" type="text">
-				<span class="errorTitle"></span>
+				<input id="photoTitle" type="text" onchange="verifForm()">
 				<label for="photoCategories">Catégorie</label>
-				<select id="photoCategories">
+				<select id="photoCategories" onchange="verifForm()">
 					<option class="empty"></option>
 				</select>
-				<span id="errorCategory"></span>
+				<span id="errorForm"></span>
 				<span class="modal__two-dividerbar"></span>
 				<input id="validateProject" class="modal__two-validationbutton" type="submit" value="Valider">
 			</form>
