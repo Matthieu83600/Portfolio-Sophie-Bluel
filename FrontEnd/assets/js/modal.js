@@ -84,8 +84,8 @@ async function getWorksModal() {
                         const response = await fetch(`http://localhost:5678/api/works/${id}`, {
                         method: 'DELETE',
                         headers: {
-                            accept: '*/*',
-                            Authorization: `Bearer ${monToken}`,
+                            'accept': '*/*',
+                            'Authorization': `Bearer ${monToken}`,
                         }
                     });
                     // Si la réponse est ok, on recharge les galeries
@@ -149,7 +149,7 @@ async function getWorksModal() {
             dataCategories.forEach((category) => {
                 const option = document.createElement('option');
                 option.innerText = category.name;
-                option.id = category.id;
+                option.value = category.id;
                 select.appendChild(option);
             });
         });
@@ -164,4 +164,58 @@ async function getWorksModal() {
         }
     };
     verifForm();
-    
+
+    // Fonction pour valider le formulaire
+    async function validationFormModal () {
+        // Sélection des infos pour soumettre le formulaire
+        const inputImageUrl = document.getElementById("addPhoto").files[0];
+        const titleProject = document.getElementById("photoTitle").value;
+        const categoryProject = document.getElementById("photoCategories").value;
+        
+        /* Test de récupération des infos
+           console.log(inputImageUrl);
+           console.log(titleProject);
+           console.log(categoryProject);
+        */
+        // On crée le formulaire de soumission du projet
+        let formData = new FormData;
+        formData.append("image", inputImageUrl);
+        formData.append("title", titleProject);
+        formData.append("category", categoryProject);
+        /* Test de vérification que le formulaire est bien créé
+           console.log(formData);
+        */
+        const myToken = localStorage.getItem("token");
+        /* Test de récupération du token d'authentification pour soumettre nouveau projet
+           console.log(myToken);
+        */    
+            await fetch("http://localhost:5678/api/works", {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${myToken}`,
+                },
+                body: formData,
+            })
+            // Si la réponse est OK (status 201)
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } 
+                throw new Error("Erreur lors du transfert");
+            })
+            .then((data) => {
+                console.log(data);
+                getWorksModal();
+                getWorks();
+                location.reload();
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    };    
+
+    // Evènement au clic pour soumettre le formulaire
+    formModal.addEventListener("submit", (event) => {
+        event.preventDefault();
+        validationFormModal();
+    })
