@@ -145,6 +145,8 @@ async function getWorksModal() {
         .then(response => response.json())
         .then(dataCategories => {
             const select = document.getElementById("photoCategories");
+            const emptyOption = document.createElement('option');
+            select.appendChild(emptyOption);
 
             dataCategories.forEach((category) => {
                 const option = document.createElement('option');
