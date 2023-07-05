@@ -213,7 +213,7 @@ async function deleteAllProject(event) {
             validateProject.classList.toggle("active");
             errorForm.style.display = 'none';
         } else {
-            errorForm.innerText = "Veuillez renseigner tous les champs";
+            validateProject.classList.remove("active");
         }
     };
     verifForm();
@@ -224,47 +224,49 @@ async function deleteAllProject(event) {
         const inputImageUrl = document.getElementById("addPhoto").files[0];
         const titleProject = document.getElementById("photoTitle").value;
         const categoryProject = document.getElementById("photoCategories").value;
+
         
         /* Test de récupération des infos
            console.log(inputImageUrl);
            console.log(titleProject);
            console.log(categoryProject);
         */
-        // On crée le formulaire de soumission du projet
-        let formData = new FormData;
-        formData.append("image", inputImageUrl);
-        formData.append("title", titleProject);
-        formData.append("category", categoryProject);
-        /* Test de vérification que le formulaire est bien créé
-           console.log(formData);
-        */
-        const myToken = localStorage.getItem("token");
-        /* Test de récupération du token d'authentification pour soumettre nouveau projet
-           console.log(myToken);
-        */    
-            await fetch("http://localhost:5678/api/works", {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${myToken}`,
-                },
-                body: formData,
-            })
-            // Si la réponse est OK (status 201)
-            .then((response) => {
-                if (response.ok) {
-                    return response.json();
-                } 
-                throw new Error("Erreur lors du transfert");
-            })
-            .then((data) => {
-                console.log(data);
-                getWorksModal();
-                getWorks();
-                location.reload();
-            })
-            .catch((error) => {
-                console.log(error);
-            })
+       if (inputImageUrl !== "" && titleProject !== "" && categoryProject !== "") {
+            // On crée le formulaire de soumission du projet
+            let formData = new FormData;
+            formData.append("image", inputImageUrl);
+            formData.append("title", titleProject);
+            formData.append("category", categoryProject);
+            /* Test de vérification que le formulaire est bien créé
+            console.log(formData);
+            */
+            const myToken = localStorage.getItem("token");
+            /* Test de récupération du token d'authentification pour soumettre nouveau projet
+            console.log(myToken);
+            */    
+                await fetch("http://localhost:5678/api/works", {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${myToken}`,
+                    },
+                    body: formData,
+                })
+                // Si la réponse est OK (status 201)
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    } 
+                    throw new Error("Erreur lors du transfert");
+                })
+                .then((data) => {
+                    location.reload();
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+       } else {
+            errorForm.innerText = "Veuillez renseigner tous les champs";
+       }  
     };    
 
     // Evènement au clic pour soumettre le formulaire
