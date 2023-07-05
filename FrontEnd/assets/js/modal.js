@@ -114,6 +114,41 @@ async function getWorksModal() {
 });     
 };
 
+
+// Evènement au clic "Supprimer la galerie"
+const deleteAll = document.querySelector(".modal__one-deletegallery");
+deleteAll.addEventListener("click", deleteAllProject);
+// Fonction de suppression de toute la galerie 
+async function deleteAllProject(event) {
+    event.preventDefault();
+    if (confirm("Voulez-vous supprimer tous les projets ?")) {
+        let projectModal = document.querySelectorAll(".modal__one-gallery figure");
+
+        for (let i = 0; i < projectModal.length; i++) {
+            const idProject = projectModal[i].id;
+            const monToken = localStorage.getItem("token");
+            /* Test de récupération des id de chaque projet avec la boucle for
+               console.log(idProject);
+            */
+            let response = await fetch (`http://localhost:5678/api/works/${idProject}`, {
+                method: 'DELETE',
+                headers: {
+                    'accept': '*/*',
+                    'Authorization': `Bearer ${monToken}`,
+                }
+            });
+            if (response.ok) {
+                getWorks();
+                getWorksModal();
+            } else {
+                alert("Echec de la suppresion de la galerie...")
+            };
+        }
+    } else {
+        alert("La galerie n'a pas été supprimée...");
+    }
+};
+
 // Formulaire d'envoi d'un nouveau projet
     // Eléments requis pour valider l'ajout d'un projet
     const formModal = document.getElementById("modal__two-form");
