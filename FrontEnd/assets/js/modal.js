@@ -118,18 +118,25 @@ async function getWorksModal() {
 // Evènement au clic "Supprimer la galerie"
 const deleteAll = document.querySelector(".modal__one-deletegallery");
 deleteAll.addEventListener("click", deleteAllProject);
+
 // Fonction de suppression de toute la galerie 
 async function deleteAllProject(event) {
     event.preventDefault();
+    // Demande de confirmation de suppression de la galerie
+    // Si oui, exécute le code
     if (confirm("Voulez-vous supprimer tous les projets ?")) {
+        // Sélection de tous les projets
         let projectModal = document.querySelectorAll(".modal__one-gallery figure");
-
+        // Boucle permettant de récupérer chaque id des projets
         for (let i = 0; i < projectModal.length; i++) {
+            // idProject correspond à chaque id de chaque projet
             const idProject = projectModal[i].id;
+            // Récupération du token
             const monToken = localStorage.getItem("token");
             /* Test de récupération des id de chaque projet avec la boucle for
                console.log(idProject);
             */
+           // Appel à l'API pour demander l'autorisation de supprimer les projets
             let response = await fetch (`http://localhost:5678/api/works/${idProject}`, {
                 method: 'DELETE',
                 headers: {
@@ -137,13 +144,16 @@ async function deleteAllProject(event) {
                     'Authorization': `Bearer ${monToken}`,
                 }
             });
+            // Si réponse OK, on recharge les galeries (vide)
             if (response.ok) {
                 getWorks();
                 getWorksModal();
             } else {
+                // Sinon on affiche un message d'erreur
                 alert("Echec de la suppresion de la galerie...")
             };
         }
+    // Si non, affiche message d'annulation    
     } else {
         alert("La galerie n'a pas été supprimée...");
     }
@@ -162,10 +172,14 @@ async function deleteAllProject(event) {
 
     // Prévisualisation d'une photo
     function previewPicture() {
+        // Sélection du containeur qui va afficher la photo
         const sectionPrev = document.querySelector(".modal__two-imgcontainer");
+        // Evènement au clic quand on ajoute l'image, "change" indique un changement de valeur réalisé par l'utilisateur
         inputImage.addEventListener("change", () => {
+            // On cache le texte
             const textAddPhoto = document.querySelector(".modal__two-textAddPhoto");  
             textAddPhoto.style.display = 'none';  
+            // On créé l'image
             const prevImage = document.createElement("img");
             let selectionFile = inputImage.files[0];
             const urlObjet = URL.createObjectURL(selectionFile);
@@ -179,10 +193,12 @@ async function deleteAllProject(event) {
     fetch("http://localhost:5678/api/categories")
         .then(response => response.json())
         .then(dataCategories => {
+            // On récupère le select pour ajouter les catégories
             const select = document.getElementById("photoCategories");
+            // Catégorie vide pour le visuel
             const emptyOption = document.createElement('option');
             select.appendChild(emptyOption);
-
+            // Récupération dynamique des catégories présentes sur API
             dataCategories.forEach((category) => {
                 const option = document.createElement('option');
                 option.innerText = category.name;
