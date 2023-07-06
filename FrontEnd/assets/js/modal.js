@@ -233,7 +233,7 @@ async function deleteAllProject(event) {
         */
        if (inputImageUrl !== "" && titleProject !== "" && categoryProject !== "") {
             // On crée le formulaire de soumission du projet
-            let formData = new FormData;
+            let formData = new FormData();
             formData.append("image", inputImageUrl);
             formData.append("title", titleProject);
             formData.append("category", categoryProject);
