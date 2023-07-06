@@ -209,7 +209,7 @@ async function deleteAllProject(event) {
     // Si conditions remplies = bouton "Valider" passe au vert 
     function verifForm() {
         let i;
-        if (titleProject.value !== "" && categoryProject.value !== "" && inputImage.files[0] !== undefined){
+        if (titleProject.value !== "" && categoryProject.value !== "" && inputImage.value !== ""){
             validateProject.classList.toggle("active");
             errorForm.style.display = 'none';
         } else {
