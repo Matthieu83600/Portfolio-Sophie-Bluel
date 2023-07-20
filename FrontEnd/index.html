@@ -43,14 +43,14 @@
 					<span class="modal__two-icon">
 						<i class="fa-regular fa-image"></i>
 					</span>
-					<label for="addPhoto" class="modal__two-textAddPhoto" onchange="veriForm()">+ Ajouter photo</label>
-					<input id="addPhoto" class="modal__two-addphoto" type="file" accept="image/jpg, image/png" onchange="verifForm()">
+					<label for="addPhoto" class="modal__two-textAddPhoto">+ Ajouter photo</label>
+					<input id="addPhoto" class="modal__two-addphoto" type="file" accept="image/jpg, image/png">
 					<span class="modal__two-desc">jpg, png : 4mo max</span>
 				</span>
-				<label for="photoTitle">Titre</label>
-				<input id="photoTitle" type="text" onchange="verifForm()">
+				<label for="photoTitle" class="modal__two-pictureinput">Titre</label>
+				<input id="photoTitle" type="text" >
 				<label for="photoCategories">Catégorie</label>
-				<select id="photoCategories" onchange="verifForm()">
+				<select id="photoCategories">
 					<!-- Catégories ajoutées dynamiquement -->
 				</select>
 				<span id="errorForm"></span>

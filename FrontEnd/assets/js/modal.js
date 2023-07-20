@@ -171,23 +171,51 @@ async function deleteAllProject(event) {
     let errorForm = document.getElementById("errorForm");
 
     // Prévisualisation d'une photo
-    function previewPicture() {
-        // Sélection du containeur qui va afficher la photo
-        const sectionPrev = document.querySelector(".modal__two-imgcontainer");
-        // Evènement au clic quand on ajoute l'image, "change" indique un changement de valeur réalisé par l'utilisateur
-        inputImage.addEventListener("change", () => {
-            // On cache le texte
-            const textAddPhoto = document.querySelector(".modal__two-textAddPhoto");  
-            textAddPhoto.style.display = 'none';  
-            // On créé l'image
-            const prevImage = document.createElement("img");
-            let selectionFile = inputImage.files[0];
-            const urlObjet = URL.createObjectURL(selectionFile);
-            prevImage.src = urlObjet;
-            sectionPrev.appendChild(prevImage);
+    inputImage.addEventListener("change", previewPicture);
+
+    function previewPicture(event) {
+        event.preventDefault();
+
+        // Utilisation de l'objet FileReader pour lire l'image
+        const reader = new FileReader();
+        reader.readAsDataURL(inputImage.files[0]);
+
+        // Listener de chargement sur la lecture de l'image
+        reader.addEventListener("load", () => {
+            previewImage.src = reader.result;
         });
+        
+        // Affichage de l'image 
+        const pictureContainer = document.querySelector(".modal__two-imgcontainer");
+        const previewImage = document.createElement("img");
+        // On ajoute un id pour pouvoir la supprimer lors du reset du formulaire
+        previewImage.setAttribute("id", "previewImage");
+        // On relie l'image au parent Containeur
+        pictureContainer.appendChild(previewImage);
+        // On lui donne les dimensions pour l'affichage
+        previewImage.style.width = "140px";
+        previewImage.style.height = "183px";
+
+        // On cache le label qui dépasse lors de prévisualisation de la photo
+        const labelPicture = document.querySelector(".modal__two-textAddPhoto");
+        labelPicture.style.opacity = "0";
     };
-    previewPicture();
+        
+    // Reset formulaire
+    function resetForm() {
+        document.getElementById("modal__two-form").reset();
+
+        // Suppresion de la prévisualisation de la photo du projet après validation formulaire
+        const pictureContainer = document.querySelector(".modal__two-imgcontainer");
+        const previewImage = document.getElementById("previewImage");
+        if (previewImage) {
+            pictureContainer.removeChild(previewImage);
+        };
+
+        // On affiche de nouveau le label
+        const labelPicture = document.querySelector(".modal__two-textAddPhoto");
+        labelPicture.style.opacity = "1";
+    };
 
     // Ajout des catégories au formulaire d'ajout de projet 
     fetch("http://localhost:5678/api/categories")
@@ -206,17 +234,21 @@ async function deleteAllProject(event) {
                 select.appendChild(option);
             });
         });
-    // Si conditions remplies = bouton "Valider" passe au vert 
+
+    // Listeners sur les infos à soumettre pour que le bouton "Valider" passe au vert
+    inputImage.addEventListener("input", verifForm);
+    titleProject.addEventListener("input", verifForm);
+    categoryProject.addEventListener("input", verifForm);
+    
+    // Fonction de vérification si les conditions sont remplies = bouton "Valider" passe au vert
     function verifForm() {
-        let i;
         if (titleProject.value !== "" && categoryProject.value !== "" && inputImage.value !== ""){
             validateProject.classList.toggle("active");
             errorForm.style.display = 'none';
         } else {
-            validateProject.classList.remove("active");
+            errorForm.innerText = "Veuillez renseigner tous les champs";
         }
     };
-    verifForm();
 
     // Fonction pour valider le formulaire
     async function validationFormModal () {
@@ -225,52 +257,67 @@ async function deleteAllProject(event) {
         const titleProject = document.getElementById("photoTitle").value;
         const categoryProject = document.getElementById("photoCategories").value;
 
+        // Sélection des galeries et de la modale
+        const gallery = document.querySelector(".gallery");
+        const galleryModal = document.querySelector(".modal__one-gallery");
+        const modalContainer = document.querySelector(".modal__container");
         
         /* Test de récupération des infos
            console.log(inputImageUrl);
            console.log(titleProject);
            console.log(categoryProject);
         */
-       if (inputImageUrl !== "" && titleProject !== "" && categoryProject !== "") {
-            // On crée le formulaire de soumission du projet
-            let formData = new FormData();
-            formData.append("image", inputImageUrl);
-            formData.append("title", titleProject);
-            formData.append("category", categoryProject);
-            /* Test de vérification que le formulaire est bien créé
-            console.log(formData);
-            */
-            const myToken = localStorage.getItem("token");
-            /* Test de récupération du token d'authentification pour soumettre nouveau projet
-            console.log(myToken);
-            */    
-                await fetch("http://localhost:5678/api/works", {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${myToken}`,
-                    },
-                    body: formData,
-                })
-                // Si la réponse est OK (status 201)
-                .then((response) => {
-                    if (response.ok) {
-                        return response.json();
-                    } 
-                    throw new Error("Erreur lors du transfert");
-                })
-                .then((data) => {
-                    location.reload();
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-       } else {
-            errorForm.innerText = "Veuillez renseigner tous les champs";
-       }  
+        // On crée le formulaire de soumission du projet
+        let formData = new FormData();
+        formData.append("image", inputImageUrl);
+        formData.append("title", titleProject);
+        formData.append("category", categoryProject);
+        /* Test de vérification que le formulaire est bien créé
+        console.log(formData);
+        */
+        const myToken = localStorage.getItem("token");
+        /* Test de récupération du token d'authentification pour soumettre nouveau projet
+        console.log(myToken);
+        */    
+            await fetch("http://localhost:5678/api/works", {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${myToken}`,
+                },
+                body: formData,
+            })
+            // Si la réponse est OK (status 201)
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } 
+                throw new Error("Erreur lors du transfert");
+            })
+            .then((data) => {
+                // Réinitialisation des galeries
+                gallery.innerHTML = "";
+                galleryModal.innerHTML = "";
+                // On recharge dynamiquement les galeries
+                getWorks();
+                getWorksModal();
+                // Bouton "Valider" du formulaire redevient gris
+                validateProject.classList.remove("active");
+                // Fermeture de la modale
+                modalContainer.classList.remove("active");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };    
 
     // Evènement au clic pour soumettre le formulaire
     formModal.addEventListener("submit", (event) => {
         event.preventDefault();
         validationFormModal();
-    })
+        resetForm();
+        /* Vérification que le formulaire est bien remis à zéro et qu'il ne contient aucune donnée
+           console.log(inputImage.files)
+           console.log(titleProject.value)
+           console.log(categoryProject.value)
+        */
+    });
